@@ -1,0 +1,20 @@
+# Arquivos compilados
+*.class
+bin/
+out/
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Dependências do Maven/Gradle
+target/
+build/
