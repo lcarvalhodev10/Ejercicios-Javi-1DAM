@@ -9,8 +9,8 @@ public class Test {
 		Coche c3 = new Coche(Marca.BM, Color.AM);
 		Coche c4 = new Coche(Marca.BM, Color.AM);
 		Parking park = new Parking("Puerta Jerez", 10);
-		
-		park.reportParking();
+		Parking p = new Parking("Alameda", 100);
+
 		System.out.println(park.entraCoche(c2));
 		System.out.println(park.entraCoche(c2));
 		System.out.println(park.entraCoche(c3));
@@ -20,16 +20,30 @@ public class Test {
 		park.reportColores();
 		park.reportMarca();
 		park.reportCochesIguales();
+		park.reportSetCoches();
 		
 		System.out.println(park.saleCoche(c2));
 		park.reportColores();
 		System.out.println(park.vaciarParking());
-		park.reportParking();
-		park.reportColores();
-		park.reportMarca();
-		park.reportCochesIguales();
 		
+		for (int i = 0; i < 50; i++) {
+			p.entraCoche(new Coche());
+		}
 		
+		p.reportParking();
+		p.reportColores();
+		p.reportMarca();
+		p.reportCochesIguales();
+		p.reportSetCoches();
+		
+		for (int i = 0; i < 20; i++) {
+			p.saleCocheAleatorio();
+		}
+		p.reportParking();
+		p.reportColores();
+		p.reportMarca();
+		p.reportCochesIguales();
+		p.reportSetCoches();
 		
 		
 	}
