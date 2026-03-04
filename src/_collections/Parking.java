@@ -2,16 +2,13 @@ package _collections;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
 /***
- * Responsable de gestionar coches con la creación de parking. A través de
- * listas y mapas se gestiona entradas y salidas de parking.
- * 
+ * Responsable de gestionar entradas y salidas de coches de parking a través de listas y mapas.
  * @author luana
  * @version 1.0
  */
@@ -20,52 +17,50 @@ public class Parking {
 	private int totalPlazas;
 	private static Random random = new Random();
 	// Lista de coches
-	private List<Coche> listaCoches = new ArrayList<>();
+	private List<Coche> listaCoches;
 	// Contador de colores de coches
-	private Map<Color, Integer> contadorColor = new HashMap<>();
+	private Map<Color, Integer> contadorColor;
 	// Contador de marcas de coches
-	private Map<Marca, Integer> contadorMarca = new HashMap<>();
+	private Map<Marca, Integer> contadorMarca;
 	// Contador de tipos de coches
-	private Map<Coche, Integer> contadorCochesIguales = new HashMap<>();
+	private Map<Coche, Integer> contadorCochesIguales;
 	// Set de tipos de coches
 	private Set<Coche> setCoches;
 
 	public Parking(String nombre, int totalPlazas) {
 		this.nombre = nombre;
 		this.totalPlazas = totalPlazas;
+		
+		listaCoches = new ArrayList<Coche>();
+		contadorColor = new HashMap<>();
+		contadorMarca = new HashMap<>();
+		contadorCochesIguales = new HashMap<>();
 	}
 
 	/***
 	 * Gestiona entrada de coches especificos en parking.
 	 * 
 	 * @param c Coche asignado para entrar en parking
-	 * @return true si es posible adicionarlo a lista
+	 * @return puedeEntrar si es posible adicionarlo a lista
 	 */
 	public boolean entraCoche(Coche c) {
 		boolean hayPlazas = listaCoches.size() < totalPlazas;
+		// verificar si ya esta dentro
 		boolean estaDentro = false;
-		boolean puedeEntrar = hayPlazas && !estaDentro;
 		for (Coche coche : listaCoches) {
 			if (coche == c) {
 				estaDentro = true;
 				break;
 			}
 		}
+		// si no hay plazas y ya no estaba dentro se puede entrar
+		boolean puedeEntrar = hayPlazas && !estaDentro;
+		
 		
 		// adiciona a lista
-		if (hayPlazas && !estaDentro) {
+		if (puedeEntrar) {
 			listaCoches.add(c);
 		}
-		
-		/*for (Map.Entry<Color, Integer> entry : contadorColor.entrySet()) {
-			Color key = entry.getKey();
-			Integer val = entry.getValue();
-			if(key == c.getColor()) {
-				contadorColor.put(key, val + 1);
-			} else {
-				contadorColor.put(key, 1);
-			}
-		}*/
 		
 		// actualiza mapa de colores
 		Color color = c.getColor();
@@ -88,7 +83,7 @@ public class Parking {
 	 * Gestiona salida de coches especificos del parking..
 	 * 
 	 * @param c Coche asignado para salir del parking
-	 * @return true si es posible removerlo de lista
+	 * @return estaDentro si es posible removerlo de lista
 	 */
 	public boolean saleCoche(Coche c) {
 		boolean estaVacio = listaCoches.isEmpty();
@@ -98,7 +93,6 @@ public class Parking {
 				estaDentro = true; 
 			}
 		}
-		
 		if (!estaDentro|| estaVacio) return false;
 		
 		// remove de lista
@@ -107,25 +101,19 @@ public class Parking {
 		// actualiza mapa de colores
 		Color color = c.getColor();
 		Integer elementoColor = contadorColor.get(color);
-		/*
-		 * contadorColor.put(color, elementoColor -1 ); 
-		 * if(elementoColor == 0) contadorColor.remove(color);
-		 */
-		
-		
-		if (elementoColor == 1) {
-			contadorColor.remove(color);
-		} else {
+		if (elementoColor > 1) {
 			contadorColor.put(color, elementoColor - 1);
+		} else {
+			contadorColor.remove(color);
 		}
 
 		// actualiza mapa de marcas
 		Marca marca = c.getMarca();
 		Integer elementoMarca = contadorMarca.get(marca);
-		if (elementoMarca == 1) {
-			contadorMarca.remove(marca);
-		} else {
+		if (elementoMarca > 1) {
 			contadorMarca.put(marca, elementoMarca - 1);
+		} else {
+			contadorMarca.remove(marca);
 		}
 
 		// actualiza mapa de coches iguales
@@ -136,7 +124,7 @@ public class Parking {
 			contadorCochesIguales.put(c, elementoCocheIgual - 1);
 		}
 
-		return true;
+		return estaDentro;
 	}
 
 	/***
@@ -207,7 +195,7 @@ public class Parking {
 	/***
 	 * Información de cantidad de marcas de coches en parking.
 	 */
-	public void reportMarca() {
+	public void reportMarcas() {
 		System.out.println("LISTADO DE MARCAS");
 		System.out.println("--------------");
 		System.out.println("Parking: " + nombre);
@@ -234,7 +222,7 @@ public class Parking {
 					cantidad, cantidad > 1 ? "ces" : "z");
 		}
 
-		System.out.printf("Total coches: %d.%n", listaCoches.size());
+		System.out.printf("Total coches: %d.%n", contadorCochesIguales.size());
 	}
 
 	/***

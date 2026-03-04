@@ -8,13 +8,11 @@ import java.util.Random;
  * Esta clase permite la creación de coches específicos o aleatorios.
  * 
  * <p>{@code toString()} devuelve marca y color de coche.</p>
- * 
  * @since 1.0
  */
 public class Coche {
 	private Marca marca; 
 	private Color color;
-	private Random random = new Random();
 	
 	public Coche(Marca marca, Color color) {
 		this.marca = marca;
