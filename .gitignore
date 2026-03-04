@@ -18,3 +18,7 @@ Thumbs.db
 # Dependências do Maven/Gradle
 target/
 build/
+
+# Javadoc
+doc/
+FETCH_HEAD

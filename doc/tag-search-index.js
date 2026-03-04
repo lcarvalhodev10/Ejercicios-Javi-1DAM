@@ -1,1 +1,0 @@
-tagSearchIndex = [{"l":"Proyecto para prácticas de clase","h":"module EjerciciosJavi1DAM","d":"Section","u":"EjerciciosJavi1DAM/module-summary.html#proyecto-para-pr-cticas-de-clase-heading"}];updateSearchResults();
