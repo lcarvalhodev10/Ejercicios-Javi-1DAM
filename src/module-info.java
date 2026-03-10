@@ -4,5 +4,6 @@
  * @version 1.0
  */
 module EjerciciosJavi1DAM {
-	exports _collections; 
+	exports _collections;
+	requires org.junit.jupiter.api; 
 }
