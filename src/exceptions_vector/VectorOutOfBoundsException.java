@@ -1,4 +1,4 @@
-package exceptions;
+package exceptions_vector;
 
 public class VectorOutOfBoundsException extends Exception{
 	
