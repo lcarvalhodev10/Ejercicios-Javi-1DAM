@@ -1,16 +1,21 @@
 package exceptions_jaula_y_pajaro;
 
 public class Pajaro {
-	private int id; 
 	private static int nextID = 1;
+	private int id; 
+	
 	
 	public Pajaro() {
 		id = nextID++; 
 	}
 
 	public String toString() {
-		return "Pajaro [id=" + id + "]";
-	} 
+		return new StringBuilder()
+				.append("P-")
+				.append(id)
+				.toString(); 	
+	}
+	
 	
 	
 	
