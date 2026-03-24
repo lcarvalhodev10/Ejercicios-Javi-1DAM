@@ -107,11 +107,16 @@ public class EjemploEnteros {
 		
 		// Ejercicio 2 - calculo de arrays
 		
-		int[] numeros = {1, 2, 3, 4, 5};
+		System.out.println("CALCULO CON ARRAY");
+		System.out.println("-----------------");
 		
-		 
-		
-		
+		System.out.println(sumaArray(new int[] {1, 2, 3}, x -> true));
+		System.out.println(sumaArray(new int[] {1, 2, 3}, x -> x % 2 == 0));
+		System.out.println(sumaArray(new int[] {1, 2, 3}, x -> x %  2 != 0));
+		System.out.println(sumaArray(new int[] {1, 2, 3}, x -> x > 0));
+		System.out.println(sumaArray(new int[] {-1, 2, -3}, x -> x < 0));
+		System.out.println(sumaArray(new int[] {1, 200, 300}, x -> x > 100));
+		System.out.println(sumaArray(new int[] {1, 2, 3}, x -> x > 2));		
 		
 	
 		
