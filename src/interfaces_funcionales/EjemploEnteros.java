@@ -118,7 +118,7 @@ public class EjemploEnteros {
 		System.out.println(sumaArray(new int[] {1, 200, 300}, x -> x > 100));
 		System.out.println(sumaArray(new int[] {1, 2, 3}, x -> x > 2));		
 		
-	
+		
 		
 			
 		  

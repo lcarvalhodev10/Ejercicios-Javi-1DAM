@@ -1,5 +1,8 @@
 package interfaces_funcionales;
 
+import java.util.function.BiPredicate;
+import java.util.function.Predicate;
+
 public class EjemploString {
 	public static void main(String[] args) {
 		
@@ -16,7 +19,18 @@ public class EjemploString {
 		System.out.println(empiezaPorA.opera("Anabelle"));
 		System.out.println(terminaPorPunto.opera("Hola."));
 		System.out.println(empiezaPor.opera("Laura", "l"));
+		
+		BiPredicate<String, String> igual2 = (s1, s2) -> s1.equals(s2);
+		BiPredicate<String, String> contiene2 = (s1, s2) -> s1.contains(s2); 
+		Predicate<String> menorDeTres2 = s -> s.length() > 3; 
+		Predicate<Character> empiezaPorA2 = s -> s.toString().startsWith("A"); 
+		Predicate<Character> terminaPorPunto2 = s -> s.toString().endsWith(".");
+		
 		 
+		
+		
+		
+		
 		
 	}
 	
