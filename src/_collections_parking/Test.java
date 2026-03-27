@@ -1,4 +1,4 @@
-package _collections;
+package _collections_parking;
 
 /***
  * Clase para pruebas de funcionamiento de parking 

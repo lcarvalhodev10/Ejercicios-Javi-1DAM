@@ -1,4 +1,4 @@
-package _collections;
+package _collections_parking;
 
 /***
  * Enumeración que representa los colores disponibles para un coche.

@@ -66,7 +66,7 @@ public class EjemploEnteros {
 		EntraEnteroSaleEntero tripleIF = p -> p* 3; 
 		EntraEnteroSaleEntero polimonioIF = p -> 5 * cuboIF.opera(p) + 7 * cuadradoIF.opera(p) + 9;
 		// Interfaz Entra4EnterosSale4Enteros
-		Entra4EnterosSale4Enteros polinomioVariableIF = (p, a, b, c) -> a * cuboIF.opera(p) + b * cuadradoIF.opera(p) + c; 		
+		EntraCuatroEnterosSaleEntero polinomioVariableIF = (p, a, b, c) -> a * cuboIF.opera(p) + b * cuadradoIF.opera(p) + c; 		
 		
 		System.out.println(cuadradoIF.opera(5));
 		System.out.println(cuboIF.opera(6));

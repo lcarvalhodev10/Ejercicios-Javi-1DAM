@@ -1,4 +1,4 @@
-package _collections;
+package _collections_parking;
 
 /***
  * Enumeración que representa las marcas disponibles para un coche.

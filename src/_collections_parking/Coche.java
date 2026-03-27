@@ -1,4 +1,4 @@
-package _collections;
+package _collections_parking;
 
 import java.util.Objects;
 import java.util.Random;
