@@ -2,6 +2,9 @@ package streams;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class TestLibrary {
 	public static void main(String[] args) {
@@ -35,14 +38,39 @@ public class TestLibrary {
         library.add(new Book(cervantes, "Don Quijote (Parte II)")); 
         
         
-        library.stream()
+       
+        
+        /*library.stream()
         		.map(b -> b.getAuthor())
         		.distinct()
         		.filter(author -> author.getGender() == Gender.FEMALE)
         		.filter(author -> author.getAge() >= 50)
         		.forEach(a -> System.out.println(a.getName() + " " + a.getSurname()));
-        	
+        	*/
+        
+        List<String> apellidosBuscados = library.stream()
+        		.map(b -> b.getAuthor())
+        		.filter(a -> a.getAge() >= 50)
+        		.distinct()
+        		.limit(15)
+        		.map((Author a) -> a.getSurname())
+        		.map((String a) -> a.toUpperCase())
+        		.collect(Collectors.toList()); 
+        		//.forEach((a) -> System.out.println(a));
+        
+        System.out.println(apellidosBuscados);
+        
+        
+      library.stream()
+        		.map(b -> b.getAuthor())
+        		.filter(a -> a.getGender() == Gender.FEMALE)
+        		.map(Author::getAge)
+        		.filter(age -> age < 60)
+        		.reduce(0, (n, m) -> Integer.sum(n, m)); 
+        		//.forEach(a -> System.out.println(a));
         		
+        
+        
        
         
         
@@ -52,5 +80,13 @@ public class TestLibrary {
         
         
         
+        
+        
+        
+        
+        
+        
+        
 	}
+
 }
