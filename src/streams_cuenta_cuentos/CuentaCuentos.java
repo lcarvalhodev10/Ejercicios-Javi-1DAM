@@ -1,4 +1,4 @@
-package cuenta_cuentos_streams;
+package streams_cuenta_cuentos;
 
 public class CuentaCuentos {
 
