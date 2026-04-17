@@ -11,6 +11,4 @@ public enum Categoria {
 	CA8, 
 	CA9, 
 	CA10; 
-	
-	
 }

@@ -1,34 +1,56 @@
 package examen_3T;
 
-import java.util.Objects;
 import java.util.Random;
 
-public class Producto {
-	private String nombre; 
-	private Categoria categoria;
-	private String fabricante; 
-	private short añoLanzamiento; 
-	private double precio; 
-	private int id; 
-	private static int nextID = 1000;
-	private Random random = new Random(); 
+public class Producto implements Comparable<Producto>{
+	private static int nextID = 1_000;
+	private static Random random = new Random(); 
 	
-	public Producto() {
-		this.id = nextID++; 
-		this.categoria = Categoria.values()[random.nextInt()];
+	private int id; 
+	private String nombre; 
+	private Categoria categoria; 
+	private String fabricante;
+	private short añoLanzamiento; 
+	private double precio;
+	
+	static String[] nombres = {"producto-1", "producto-2", "producto-3", "producto-4", "producto-5", "producto-6", "producto-7", "producto-8", "producto-9", "producto-10"}; 
+	static String[] fabricantes = {"fabricante-1", "fabricante-2", "fabricante-3", "fabricante-4", "fabricante-5", "fabricante-6", "fabricante-7", "fabricante-8", "fabricante-9", "fabricante-10"}; 
+	static Categoria[] categorias = Categoria.values();
+	
+	public Producto() throws PrecioInvalidoException{
+		
+		this.nombre = nombres[random.nextInt(nombres.length)];
+		this.categoria = categorias[random.nextInt(categorias.length)];
+		this.fabricante = fabricantes[random.nextInt(fabricantes.length)];
 		this.añoLanzamiento = (short)random.nextInt(2000, 2025);
-		this.precio = (double)random.nextInt(10, 1000);
-		String[] nombres = {"prod-1", "prod-2", "prod-3", "prod-4", "prod-5", "prod-6", "prod-7", "prod-8", "prod-9", "prod-10"}; 
-		this.nombre = nombres[random.nextInt()];
-		String[] fabricantes = {"fab-1", "fab-2", "fab-3", "fab-4", "fab-5", "fab-6", "fab-7", "fab-8", "fab-9", "fab-10"};
-		this.fabricante = fabricantes[random.nextInt()];
+		this.precio = random.nextDouble(10.0, 1_000);
 		
+		if(categoria == categoria.ELECTRONICA && precio > 800) {
+			throw new PrecioInvalidoException("Precios mayores de 800€ para eléctronicos no son permitidos"); 
+		}
 		
+		this.id = nextID++; 
 	}
+	
+	
+	
+	@Override
+	public int compareTo(Producto p) {
+		int comparacion = this.categoria.toString().compareTo(p.categoria.toString()); 
+		if (comparacion == 0) comparacion =this.fabricante.compareTo(p.fabricante); 
+		if (comparacion == 0) comparacion =  this.nombre.compareTo(p.nombre); 
+		return comparacion;
+	} 
 
 	@Override
 	public String toString() {
-		return "Producto [" + id + "] - " + categoria + fabricante + nombre; 
+		return String.format("[%d] %s - %s: %s", id, categoria.toString().toUpperCase(), fabricante.toUpperCase(), nombre);
+	}
+
+
+
+	public int getId() {
+		return id;
 	}
 
 	public String getNombre() {
@@ -51,28 +73,12 @@ public class Producto {
 		return precio;
 	}
 
-	public int getId() {
-		return id;
-	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(añoLanzamiento, categoria, fabricante, nombre, precio);
-	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Producto other = (Producto) obj;
-		return añoLanzamiento == other.añoLanzamiento && categoria == other.categoria
-				&& Objects.equals(fabricante, other.fabricante) && Objects.equals(nombre, other.nombre)
-				&& Double.doubleToLongBits(precio) == Double.doubleToLongBits(other.precio);
-	}
+
+
+
+
 	
 	
 	
@@ -87,4 +93,6 @@ public class Producto {
 	
 	
 	
+	
+	 
 }
