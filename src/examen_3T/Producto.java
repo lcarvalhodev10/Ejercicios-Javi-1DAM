@@ -28,7 +28,6 @@ public class Producto implements Comparable<Producto>{
 		if(categoria == categoria.ELECTRONICA && precio > 800) {
 			throw new PrecioInvalidoException("Precios mayores de 800€ para eléctronicos no son permitidos"); 
 		}
-		
 		this.id = nextID++; 
 	}
 	
