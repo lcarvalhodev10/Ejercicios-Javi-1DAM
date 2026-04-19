@@ -1,5 +1,6 @@
 package examen_3T;
 
+import java.util.Objects;
 import java.util.Random;
 
 public class Producto implements Comparable<Producto>{
@@ -23,7 +24,7 @@ public class Producto implements Comparable<Producto>{
 		this.categoria = categorias[random.nextInt(categorias.length)];
 		this.fabricante = fabricantes[random.nextInt(fabricantes.length)];
 		this.añoLanzamiento = (short)random.nextInt(2000, 2025);
-		this.precio = random.nextDouble(10.0, 1_000);
+		this.precio = random.nextDouble(10.0, 1000.0);
 		
 		if(categoria == categoria.ELECTRONICA && precio > 800) {
 			throw new PrecioInvalidoException("Precios mayores de 800€ para eléctronicos no son permitidos"); 
@@ -45,9 +46,7 @@ public class Producto implements Comparable<Producto>{
 	public String toString() {
 		return String.format("[%d] %s - %s: %s", id, categoria.toString().toUpperCase(), fabricante.toUpperCase(), nombre);
 	}
-
-
-
+   
 	public int getId() {
 		return id;
 	}
@@ -73,6 +72,29 @@ public class Producto implements Comparable<Producto>{
 	}
 
 
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(añoLanzamiento, categoria, fabricante, nombre, precio);
+	}
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Producto other = (Producto) obj;
+		return añoLanzamiento == other.añoLanzamiento && categoria == other.categoria
+				&& Objects.equals(fabricante, other.fabricante) && Objects.equals(nombre, other.nombre)
+				&& Double.doubleToLongBits(precio) == Double.doubleToLongBits(other.precio);
+	}
+
+	
 
 
 
